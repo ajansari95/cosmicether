@@ -1,0 +1,16 @@
+syntax = "proto3";
+package cosmicether.ethquery.v1;
+
+
+import "gogoproto/gogo.proto_old";
+import "cosmicether/ethquery/v1/ethquery.proto";
+
+
+option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
+
+// GenesisState defines the ethquery module's genesis state.
+message GenesisState {
+  option (gogoproto.goproto_getters) = false;
+
+  repeated Query queries = 1 [(gogoproto.nullable) = false];
+}

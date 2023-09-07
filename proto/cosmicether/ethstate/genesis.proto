@@ -1,0 +1,12 @@
+syntax = "proto3";
+package cosmicether.ethstate;
+
+import "gogoproto/gogo.proto";
+import "cosmicether/ethstate/params.proto";
+
+option go_package = "cosmicether/x/ethstate/types";
+
+// GenesisState defines the ethstate module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
