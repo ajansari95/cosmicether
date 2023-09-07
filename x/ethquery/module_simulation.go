@@ -1,11 +1,11 @@
-package ethstate
+package ethquery
 
 import (
 	"math/rand"
 
 	"cosmicether/testutil/sample"
-	ethstatesimulation "cosmicether/x/ethstate/simulation"
-	"cosmicether/x/ethstate/types"
+	ethquerysimulation "cosmicether/x/ethquery/simulation"
+	"cosmicether/x/ethquery/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
@@ -16,7 +16,7 @@ import (
 // avoid unused import issue
 var (
 	_ = sample.AccAddress
-	_ = ethstatesimulation.FindAccount
+	_ = ethquerysimulation.FindAccount
 	_ = simulation.MsgEntryKind
 	_ = baseapp.Paramspace
 	_ = rand.Rand{}
@@ -32,11 +32,11 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
-	ethstateGenesis := types.GenesisState{
+	ethqueryGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
-	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&ethstateGenesis)
+	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&ethqueryGenesis)
 }
 
 // RegisterStoreDecoder registers a decoder.

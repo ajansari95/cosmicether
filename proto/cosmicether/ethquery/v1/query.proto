@@ -1,0 +1,20 @@
+syntax = "proto3";
+package cosmicether.ethquery.v1;
+
+import "cosmicether/ethquery/v1/ethquery.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+
+option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
+
+service QuerySrvr {
+  rpc Queries(QueryRequestsRequest) returns (QueryRequestsResponse) {
+    option (google.api.http).get = "/cosmicether/ethquery/v1/queries";
+  }
+}
+
+message QueryRequestsRequest {}
+
+message QueryRequestsResponse {
+  repeated cosmicether.ethquery.v1.Query quereis = 1 [(gogoproto.nullable) = false];
+}

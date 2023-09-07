@@ -1,7 +1,0 @@
-syntax = "proto3";
-package cosmicether.ethquery.v1;
-
-
-import "gogoproto/gogo.proto_old";
-import "cosmicether/ethquery/v1/ethquery.proto";
-import "google/api/annotations.proto_old";

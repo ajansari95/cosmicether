@@ -1,3 +1,0 @@
-syntax = "proto3";
-package cosmicether.ethquery.v1;
-

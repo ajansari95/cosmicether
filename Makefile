@@ -307,7 +307,7 @@ proto-all: proto-gen
 proto-gen: proto-format
 	@echo "🤖 Generating code from protobuf..."
 	@$(DOCKER) run --rm --volume "$(PWD)":/workspace --workdir /workspace \
-		quicksilver-proto sh ./proto/generate.sh
+		cosmicether-proto sh ./proto/generate.sh
 	@echo "✅ Completed code generation!"
 
 proto-lint:
@@ -330,5 +330,5 @@ proto-breaking-check:
 
 proto-setup:
 	@echo "🤖 Setting up protobuf environment..."
-	@$(DOCKER) build --rm --tag quicksilver-proto:latest --file proto/Dockerfile .
+	@$(DOCKER) build --rm --tag cosmicether-proto:latest --file proto/Dockerfile .
 	@echo "✅ Setup protobuf environment!"

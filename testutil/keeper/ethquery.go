@@ -3,8 +3,8 @@ package keeper
 import (
 	"testing"
 
-	"cosmicether/x/ethstate/keeper"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery/keeper"
+	"cosmicether/x/ethquery/types"
 	tmdb "github.com/cometbft/cometbft-db"
 	"github.com/cometbft/cometbft/libs/log"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
@@ -17,7 +17,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func EthstateKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+func EthqueryKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
@@ -34,7 +34,7 @@ func EthstateKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		types.Amino,
 		storeKey,
 		memStoreKey,
-		"EthstateParams",
+		"EthqueryParams",
 	)
 	k := keeper.NewKeeper(
 		cdc,

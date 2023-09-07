@@ -1,7 +1,0 @@
-syntax = "proto3";
-package cosmicether.ethstate;
-
-option go_package = "cosmicether/x/ethstate/types";
-
-// Msg defines the Msg service.
-service Msg {}

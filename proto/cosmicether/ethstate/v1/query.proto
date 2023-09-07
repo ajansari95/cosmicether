@@ -1,0 +1,31 @@
+syntax = "proto3";
+package cosmicether.ethstate.v1;
+
+import "cosmicether/ethstate/v1/ethstate.proto";
+
+option go_package = "github.com/ajansari95/cosmicether/x/ethstate/types";
+
+message QuerySlotDataRequest {
+  string contractAddress = 1;
+  string slot = 2;
+}
+
+message QuerySlotDataRequestResponse {
+  slot_data SlotData = 1;
+}
+
+message QueryContractDataRequest {
+  string contractAddress = 1;
+}
+
+message QueryContractDataRequestResponse {
+  repeated slot_data Slots = 1;
+}
+
+message QueryEthBlockRequest {
+  uint64 height = 1;
+}
+
+message QueryEthBlockRequestResponse {
+  block_data blockData = 1;
+}

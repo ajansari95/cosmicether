@@ -5,14 +5,14 @@ import (
 	"testing"
 
 	keepertest "cosmicether/testutil/keeper"
-	"cosmicether/x/ethstate/keeper"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery/keeper"
+	"cosmicether/x/ethquery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {
-	k, ctx := keepertest.EthstateKeeper(t)
+	k, ctx := keepertest.EthqueryKeeper(t)
 	return keeper.NewMsgServerImpl(*k), sdk.WrapSDKContext(ctx)
 }
 

@@ -17,7 +17,7 @@ RUN git clone https://github.com/regen-network/protobuf.git; \
   cd ..
 
 RUN git clone https://github.com/regen-network/cosmos-proto.git; \
-  cd cosmos-proto_old/protoc-gen-gocosmos; \
+  cd cosmos-proto/protoc-gen-gocosmos; \
   go install .; \
   cd ..
 

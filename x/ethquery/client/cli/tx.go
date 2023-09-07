@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery/types"
 )
 
 var (

@@ -1,4 +1,4 @@
-package ethstate
+package ethquery
 
 import (
 	"context"
@@ -11,9 +11,9 @@ import (
 
 	abci "github.com/cometbft/cometbft/abci/types"
 
-	"cosmicether/x/ethstate/client/cli"
-	"cosmicether/x/ethstate/keeper"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery/client/cli"
+	"cosmicether/x/ethquery/keeper"
+	"cosmicether/x/ethquery/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

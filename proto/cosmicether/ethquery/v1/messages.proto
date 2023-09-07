@@ -1,11 +1,9 @@
 syntax = "proto3";
 package cosmicether.ethquery.v1;
 
-
-import "gogoproto/gogo.proto_old";
 import "cosmicether/ethquery/v1/ethquery.proto";
-import "google/api/annotations.proto_old";
-
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
 
@@ -35,6 +33,4 @@ message MsgSubmitQueryResponse {
 // type.
 message MsgSubmitQueryResponseResponse {}
 
-message MsgSubmitBlockHash {
-
-}
+message MsgSubmitBlockHash {}

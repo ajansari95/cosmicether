@@ -4,13 +4,13 @@ import (
 	"testing"
 
 	testkeeper "cosmicether/testutil/keeper"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
 
 func TestParamsQuery(t *testing.T) {
-	keeper, ctx := testkeeper.EthstateKeeper(t)
+	keeper, ctx := testkeeper.EthqueryKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
 	params := types.DefaultParams()
 	keeper.SetParams(ctx, params)

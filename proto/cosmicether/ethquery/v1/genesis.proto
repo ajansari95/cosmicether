@@ -1,10 +1,8 @@
 syntax = "proto3";
 package cosmicether.ethquery.v1;
 
-
-import "gogoproto/gogo.proto_old";
-
-
+import "cosmicether/ethquery/v1/ethquery.proto";
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
 

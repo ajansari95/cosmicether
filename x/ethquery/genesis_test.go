@@ -1,12 +1,12 @@
-package ethstate_test
+package ethquery_test
 
 import (
 	"testing"
 
 	keepertest "cosmicether/testutil/keeper"
 	"cosmicether/testutil/nullify"
-	"cosmicether/x/ethstate"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery"
+	"cosmicether/x/ethquery/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -17,9 +17,9 @@ func TestGenesis(t *testing.T) {
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
-	k, ctx := keepertest.EthstateKeeper(t)
-	ethstate.InitGenesis(ctx, *k, genesisState)
-	got := ethstate.ExportGenesis(ctx, *k)
+	k, ctx := keepertest.EthqueryKeeper(t)
+	ethquery.InitGenesis(ctx, *k, genesisState)
+	got := ethquery.ExportGenesis(ctx, *k)
 	require.NotNil(t, got)
 
 	nullify.Fill(&genesisState)

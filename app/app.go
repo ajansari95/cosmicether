@@ -110,10 +110,13 @@ import (
 	ibctm "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 	"github.com/spf13/cast"
 
+	ethquerymodule "cosmicether/x/ethquery"
+	ethquerymodulekeeper "cosmicether/x/ethquery/keeper"
+	ethquerymoduletypes "cosmicether/x/ethquery/types"
 	ethstatemodule "cosmicether/x/ethstate"
-		ethstatemodulekeeper "cosmicether/x/ethstate/keeper"
-		ethstatemoduletypes "cosmicether/x/ethstate/types"
-// this line is used by starport scaffolding # stargate/app/moduleImport
+	ethstatemodulekeeper "cosmicether/x/ethstate/keeper"
+	ethstatemoduletypes "cosmicether/x/ethstate/types"
+	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "cosmicether/app/params"
 	"cosmicether/docs"
@@ -174,7 +177,8 @@ var (
 		vesting.AppModuleBasic{},
 		consensus.AppModuleBasic{},
 		ethstatemodule.AppModuleBasic{},
-// this line is used by starport scaffolding # stargate/app/moduleBasic
+		ethquerymodule.AppModuleBasic{},
+		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
 	// module account permissions
@@ -249,9 +253,10 @@ type App struct {
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper  capabilitykeeper.ScopedKeeper
 
-	
-		EthstateKeeper ethstatemodulekeeper.Keeper
-// this line is used by starport scaffolding # stargate/app/keeperDeclaration
+	EthstateKeeper ethstatemodulekeeper.Keeper
+
+	EthqueryKeeper ethquerymodulekeeper.Keeper
+	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
 	mm *module.Manager
@@ -298,7 +303,8 @@ func New(
 		feegrant.StoreKey, evidencetypes.StoreKey, ibctransfertypes.StoreKey, icahosttypes.StoreKey,
 		capabilitytypes.StoreKey, group.StoreKey, icacontrollertypes.StoreKey, consensusparamtypes.StoreKey,
 		ethstatemoduletypes.StoreKey,
-// this line is used by starport scaffolding # stargate/app/storeKey
+		ethquerymoduletypes.StoreKey,
+		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -520,17 +526,23 @@ func New(
 		),
 	)
 
-	
-		app.EthstateKeeper = *ethstatemodulekeeper.NewKeeper(
-			appCodec,
-			keys[ethstatemoduletypes.StoreKey],
-			keys[ethstatemoduletypes.MemStoreKey],
-			app.GetSubspace(ethstatemoduletypes.ModuleName),
-			
-			)
-		ethstateModule := ethstatemodule.NewAppModule(appCodec, app.EthstateKeeper, app.AccountKeeper, app.BankKeeper)
+	app.EthstateKeeper = *ethstatemodulekeeper.NewKeeper(
+		appCodec,
+		keys[ethstatemoduletypes.StoreKey],
+		keys[ethstatemoduletypes.MemStoreKey],
+		app.GetSubspace(ethstatemoduletypes.ModuleName),
+	)
+	ethstateModule := ethstatemodule.NewAppModule(appCodec, app.EthstateKeeper, app.AccountKeeper, app.BankKeeper)
 
-		// this line is used by starport scaffolding # stargate/app/keeperDefinition
+	app.EthqueryKeeper = *ethquerymodulekeeper.NewKeeper(
+		appCodec,
+		keys[ethquerymoduletypes.StoreKey],
+		keys[ethquerymoduletypes.MemStoreKey],
+		app.GetSubspace(ethquerymoduletypes.ModuleName),
+	)
+	ethqueryModule := ethquerymodule.NewAppModule(appCodec, app.EthqueryKeeper, app.AccountKeeper, app.BankKeeper)
+
+	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
 
@@ -592,7 +604,8 @@ func New(
 		transferModule,
 		icaModule,
 		ethstateModule,
-// this line is used by starport scaffolding # stargate/app/appModule
+		ethqueryModule,
+		// this line is used by starport scaffolding # stargate/app/appModule
 
 		crisis.NewAppModule(app.CrisisKeeper, skipGenesisInvariants, app.GetSubspace(crisistypes.ModuleName)), // always be last to make sure that it checks for all invariants and not only part of them
 	)
@@ -625,7 +638,8 @@ func New(
 		vestingtypes.ModuleName,
 		consensusparamtypes.ModuleName,
 		ethstatemoduletypes.ModuleName,
-// this line is used by starport scaffolding # stargate/app/beginBlockers
+		ethquerymoduletypes.ModuleName,
+		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
 	app.mm.SetOrderEndBlockers(
@@ -651,7 +665,8 @@ func New(
 		vestingtypes.ModuleName,
 		consensusparamtypes.ModuleName,
 		ethstatemoduletypes.ModuleName,
-// this line is used by starport scaffolding # stargate/app/endBlockers
+		ethquerymoduletypes.ModuleName,
+		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -682,7 +697,8 @@ func New(
 		vestingtypes.ModuleName,
 		consensusparamtypes.ModuleName,
 		ethstatemoduletypes.ModuleName,
-// this line is used by starport scaffolding # stargate/app/initGenesis
+		ethquerymoduletypes.ModuleName,
+		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 	app.mm.SetOrderInitGenesis(genesisModuleOrder...)
 	app.mm.SetOrderExportGenesis(genesisModuleOrder...)
@@ -907,7 +923,8 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(icacontrollertypes.SubModuleName)
 	paramsKeeper.Subspace(icahosttypes.SubModuleName)
 	paramsKeeper.Subspace(ethstatemoduletypes.ModuleName)
-// this line is used by starport scaffolding # stargate/app/paramSubspace
+	paramsKeeper.Subspace(ethquerymoduletypes.ModuleName)
+	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
 }

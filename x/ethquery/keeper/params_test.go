@@ -4,12 +4,12 @@ import (
 	"testing"
 
 	testkeeper "cosmicether/testutil/keeper"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery/types"
 	"github.com/stretchr/testify/require"
 )
 
 func TestGetParams(t *testing.T) {
-	k, ctx := testkeeper.EthstateKeeper(t)
+	k, ctx := testkeeper.EthqueryKeeper(t)
 	params := types.DefaultParams()
 
 	k.SetParams(ctx, params)

@@ -1,8 +1,8 @@
-package ethstate
+package ethquery
 
 import (
-	"cosmicether/x/ethstate/keeper"
-	"cosmicether/x/ethstate/types"
+	"cosmicether/x/ethquery/keeper"
+	"cosmicether/x/ethquery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
