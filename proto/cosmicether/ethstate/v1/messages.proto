@@ -28,7 +28,7 @@ message MsgGetSlotDataFromEth {
   option (gogoproto.goproto_getters) = false;
 
   string contractAddress = 1;
-  string height = 2;
+  uint64 height = 2;
   string slot = 3;
 }
 

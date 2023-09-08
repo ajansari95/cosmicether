@@ -2,6 +2,7 @@ syntax = "proto3";
 package cosmicether.ethstate.v1;
 
 import "cosmicether/ethstate/v1/ethstate.proto";
+import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethstate/types";
@@ -34,7 +35,7 @@ message QueryContractDataRequest {
 }
 
 message QueryContractDataRequestResponse {
-  repeated slot_data slots = 1;
+  repeated slot_data slots = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryEthBlockRequest {

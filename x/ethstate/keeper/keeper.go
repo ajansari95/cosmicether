@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"context"
 	"cosmicether/x/ethstate/types"
 	"fmt"
 
@@ -20,21 +19,6 @@ type (
 		paramstore paramtypes.Subspace
 	}
 )
-
-func (k Keeper) SlotData(ctx context.Context, request *types.QuerySlotDataRequest) (*types.QuerySlotDataRequestResponse, error) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (k Keeper) ContractData(ctx context.Context, request *types.QueryContractDataRequest) (*types.QueryContractDataRequestResponse, error) {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (k Keeper) EthBlock(ctx context.Context, request *types.QueryEthBlockRequest) (*types.QueryEthBlockRequestResponse, error) {
-	//TODO implement me
-	panic("implement me")
-}
 
 func NewKeeper(
 	cdc codec.BinaryCodec,
