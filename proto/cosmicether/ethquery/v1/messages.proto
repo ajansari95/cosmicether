@@ -2,6 +2,7 @@ syntax = "proto3";
 package cosmicether.ethquery.v1;
 
 import "cosmicether/ethquery/v1/ethquery.proto";
+import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 
