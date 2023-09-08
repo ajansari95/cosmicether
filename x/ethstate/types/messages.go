@@ -18,7 +18,7 @@ var (
 	_ legacytx.LegacyMsg = &MsgGetSlotDataFromEth{}
 )
 
-//NewMsgSubmitSlotData - construct a msg to submit slot data
+// NewMsgSubmitSlotData - construct a msg to submit slot data
 func NewMsgSubmitSlotData(slotData SlotData, fromAddress sdk.Address) *MsgSubmitSlotData {
 	return &MsgSubmitSlotData{SlotData: &slotData, FromAddress: fromAddress.String()}
 }
@@ -61,7 +61,7 @@ func (msg MsgSubmitSlotData) GetSignBytes() []byte {
 	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(&msg))
 }
 
-// GetSigners Implements Msg.		
+// GetSigners Implements Msg.
 func (msg MsgSubmitSlotData) GetSigners() []sdk.AccAddress {
 	from, err := sdk.AccAddressFromBech32(msg.FromAddress)
 	if err != nil {
@@ -70,12 +70,12 @@ func (msg MsgSubmitSlotData) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{from}
 }
 
-//NewMsgGetSlotDataFromEth - construct a msg to get slot data from eth	
+// NewMsgGetSlotDataFromEth - construct a msg to get slot data from eth
 func NewMsgGetSlotDataFromEth(contractAddress string, slot string, height uint64) *MsgGetSlotDataFromEth {
 	return &MsgGetSlotDataFromEth{ContractAddress: contractAddress, Height: height, Slot: slot}
 }
 
-// Route Implements Msg.	
+// Route Implements Msg.
 func (msg MsgGetSlotDataFromEth) Route() string { return RouterKey }
 
 // Type Implements Msg.
