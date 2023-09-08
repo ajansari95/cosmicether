@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "cosmicether/ethquery/v1/query.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/cosmicether/ethquery/v1/queries": {
+      "get": {
+        "operationId": "Queries",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1QueryRequestsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "Query"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1EthQuery": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "query_type": {
+          "type": "string"
+        },
+        "request": {
+          "type": "string",
+          "format": "byte"
+        },
+        "callback_id": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        }
+      }
+    },
+    "v1QueryRequestsResponse": {
+      "type": "object",
+      "properties": {
+        "quereis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1EthQuery"
+          }
+        }
+      }
+    }
+  }
+}

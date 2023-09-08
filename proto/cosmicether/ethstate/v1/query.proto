@@ -2,30 +2,45 @@ syntax = "proto3";
 package cosmicether.ethstate.v1;
 
 import "cosmicether/ethstate/v1/ethstate.proto";
+import "google/api/annotations.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethstate/types";
 
+service Query {
+  rpc SlotData(QuerySlotDataRequest) returns (QuerySlotDataRequestResponse) {
+    option (google.api.http).get = "/cosmicether/ethstate/v1/slot_data/{contract_address}/{slot}";
+  }
+
+  rpc ContractData(QueryContractDataRequest) returns (QueryContractDataRequestResponse) {
+    option (google.api.http).get = "/cosmicether/ethstate/v1/contract_data/{contract_address}";
+  }
+
+  rpc EthBlock(QueryEthBlockRequest) returns (QueryEthBlockRequestResponse) {
+    option (google.api.http).get = "/cosmicether/ethstate/v1/eth_block/{block_height}";
+  }
+}
+
 message QuerySlotDataRequest {
-  string contractAddress = 1;
+  string contract_address = 1;
   string slot = 2;
 }
 
 message QuerySlotDataRequestResponse {
-  slot_data SlotData = 1;
+  slot_data slot_data = 1;
 }
 
 message QueryContractDataRequest {
-  string contractAddress = 1;
+  string contract_address = 1;
 }
 
 message QueryContractDataRequestResponse {
-  repeated slot_data Slots = 1;
+  repeated slot_data slots = 1;
 }
 
 message QueryEthBlockRequest {
-  uint64 height = 1;
+  uint64 block_height = 1;
 }
 
 message QueryEthBlockRequestResponse {
-  block_data blockData = 1;
+  block_data block_data = 1;
 }

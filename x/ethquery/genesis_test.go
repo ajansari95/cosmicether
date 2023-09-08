@@ -1,18 +1,17 @@
 package ethquery_test
 
 import (
-	"testing"
-
 	keepertest "cosmicether/testutil/keeper"
 	"cosmicether/testutil/nullify"
 	"cosmicether/x/ethquery"
 	"cosmicether/x/ethquery/types"
+	"testing"
+
 	"github.com/stretchr/testify/require"
 )
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
 
 		// this line is used by starport scaffolding # genesis/test/state
 	}

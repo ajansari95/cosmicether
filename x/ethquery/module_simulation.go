@@ -1,11 +1,11 @@
 package ethquery
 
 import (
-	"math/rand"
-
 	"cosmicether/testutil/sample"
 	ethquerysimulation "cosmicether/x/ethquery/simulation"
 	"cosmicether/x/ethquery/types"
+	"math/rand"
+
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
@@ -33,7 +33,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		accs[i] = acc.Address.String()
 	}
 	ethqueryGenesis := types.GenesisState{
-		Params: types.DefaultParams(),
+		//Params: types.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&ethqueryGenesis)

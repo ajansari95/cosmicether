@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "cosmicether/ethstate/v1/messages.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/cosmicether/tx/v1/ethstate/getslotdata": {
+      "post": {
+        "operationId": "SubmitSlotData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MsgSubmitSlotDataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1MsgSubmitSlotData"
+            }
+          }
+        ],
+        "tags": [
+          "Msg"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1MsgGetSlotDataFromEth": {
+      "type": "object",
+      "properties": {
+        "contractAddress": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MsgGetSlotDataFromEthResponse": {
+      "type": "object"
+    },
+    "v1MsgSubmitSlotData": {
+      "type": "object",
+      "properties": {
+        "slotData": {
+          "$ref": "#/definitions/v1slot_data"
+        },
+        "from_address": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MsgSubmitSlotDataResponse": {
+      "type": "object"
+    },
+    "v1slot_data": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "contractAddress": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "proof": {
+          "type": "string",
+          "format": "byte"
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

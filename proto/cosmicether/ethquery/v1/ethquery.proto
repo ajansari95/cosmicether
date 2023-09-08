@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
 
-message Query {
+message EthQuery {
   string id = 1;
   string query_type = 2;
   bytes request = 3;

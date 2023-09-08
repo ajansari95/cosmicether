@@ -1,16 +1,14 @@
 package cli
 
 import (
+	"cosmicether/x/ethquery/types"
 	"fmt"
 	// "strings"
-
-	"github.com/spf13/cobra"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
 	// sdk "github.com/cosmos/cosmos-sdk/types"
-
-	"cosmicether/x/ethquery/types"
+	"github.com/spf13/cobra"
 )
 
 // GetQueryCmd returns the cli query commands for this module
@@ -24,7 +22,7 @@ func GetQueryCmd(queryRoute string) *cobra.Command {
 		RunE:                       client.ValidateCmd,
 	}
 
-	cmd.AddCommand(CmdQueryParams())
+	//cmd.AddCommand(CmdQueryParams())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

@@ -10,5 +10,5 @@ option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
 message GenesisState {
   option (gogoproto.goproto_getters) = false;
 
-  repeated Query queries = 1 [(gogoproto.nullable) = false];
+  repeated EthQuery queries = 1 [(gogoproto.nullable) = false];
 }

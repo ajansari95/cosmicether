@@ -7,7 +7,7 @@ import "google/api/annotations.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
 
-service QuerySrvr {
+service Query {
   rpc Queries(QueryRequestsRequest) returns (QueryRequestsResponse) {
     option (google.api.http).get = "/cosmicether/ethquery/v1/queries";
   }
@@ -16,5 +16,5 @@ service QuerySrvr {
 message QueryRequestsRequest {}
 
 message QueryRequestsResponse {
-  repeated cosmicether.ethquery.v1.Query quereis = 1 [(gogoproto.nullable) = false];
+  repeated cosmicether.ethquery.v1.EthQuery quereis = 1 [(gogoproto.nullable) = false];
 }

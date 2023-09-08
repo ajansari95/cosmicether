@@ -1,0 +1,110 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "cosmicether/ethquery/v1/messages.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/ethquery/tx/v1beta1/submitquery": {
+      "post": {
+        "summary": "SubmitQueryResponse defines a method for submit query responses.",
+        "operationId": "SubmitQueryResponse",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MsgSubmitQueryResponseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1MsgSubmitQueryResponse"
+            }
+          }
+        ],
+        "tags": [
+          "Msg"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1MsgSubmitQueryResponse": {
+      "type": "object",
+      "properties": {
+        "query_id": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string",
+          "format": "byte"
+        },
+        "proof_ops": {
+          "type": "string",
+          "format": "byte"
+        },
+        "height": {
+          "type": "string",
+          "format": "int64"
+        },
+        "from_address": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MsgSubmitQueryResponseResponse": {
+      "type": "object",
+      "description": "MsgSubmitQueryResponseResponse defines the MsgSubmitQueryResponse response\ntype."
+    }
+  }
+}

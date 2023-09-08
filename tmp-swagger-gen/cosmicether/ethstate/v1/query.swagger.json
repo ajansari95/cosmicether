@@ -1,0 +1,213 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "cosmicether/ethstate/v1/query.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/cosmicether/ethstate/v1/contract_data/{contract_address}": {
+      "get": {
+        "operationId": "ContractData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1QueryContractDataRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contract_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Query"
+        ]
+      }
+    },
+    "/cosmicether/ethstate/v1/eth_block/{block_height}": {
+      "get": {
+        "operationId": "EthBlock",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1QueryEthBlockRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "block_height",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Query"
+        ]
+      }
+    },
+    "/cosmicether/ethstate/v1/slot_data/{contract_address}/{slot}": {
+      "get": {
+        "operationId": "SlotData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1QuerySlotDataRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contract_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Query"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1QueryContractDataRequestResponse": {
+      "type": "object",
+      "properties": {
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1slot_data"
+          }
+        }
+      }
+    },
+    "v1QueryEthBlockRequestResponse": {
+      "type": "object",
+      "properties": {
+        "block_data": {
+          "$ref": "#/definitions/v1block_data"
+        }
+      }
+    },
+    "v1QuerySlotDataRequestResponse": {
+      "type": "object",
+      "properties": {
+        "slot_data": {
+          "$ref": "#/definitions/v1slot_data"
+        }
+      }
+    },
+    "v1block_data": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "v1slot_data": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "contractAddress": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "proof": {
+          "type": "string",
+          "format": "byte"
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
