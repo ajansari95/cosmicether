@@ -24,6 +24,7 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		(*sdk.Msg)(nil),
 		&MsgSubmitQueryResponse{},
 	)
+	
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }
 

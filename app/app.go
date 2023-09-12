@@ -1,6 +1,15 @@
 package app
 
 import (
+	// this line is used by starport scaffolding # stargate/app/moduleImport
+	appparams "cosmicether/app/params"
+	"cosmicether/docs"
+	ethquerymodule "cosmicether/x/ethquery"
+	ethquerymodulekeeper "cosmicether/x/ethquery/keeper"
+	ethquerymoduletypes "cosmicether/x/ethquery/types"
+	ethstatemodule "cosmicether/x/ethstate"
+	ethstatemodulekeeper "cosmicether/x/ethstate/keeper"
+	ethstatemoduletypes "cosmicether/x/ethstate/types"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -109,17 +118,6 @@ import (
 	solomachine "github.com/cosmos/ibc-go/v7/modules/light-clients/06-solomachine"
 	ibctm "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 	"github.com/spf13/cast"
-
-	ethquerymodule "cosmicether/x/ethquery"
-	ethquerymodulekeeper "cosmicether/x/ethquery/keeper"
-	ethquerymoduletypes "cosmicether/x/ethquery/types"
-	ethstatemodule "cosmicether/x/ethstate"
-	ethstatemodulekeeper "cosmicether/x/ethstate/keeper"
-	ethstatemoduletypes "cosmicether/x/ethstate/types"
-	// this line is used by starport scaffolding # stargate/app/moduleImport
-
-	appparams "cosmicether/app/params"
-	"cosmicether/docs"
 )
 
 const (
@@ -540,7 +538,7 @@ func New(
 		keys[ethquerymoduletypes.MemStoreKey],
 		app.GetSubspace(ethquerymoduletypes.ModuleName),
 	)
-	ethqueryModule := ethquerymodule.NewAppModule(appCodec, app.EthqueryKeeper, app.AccountKeeper, app.BankKeeper)
+	ethqueryModule := ethquerymodule.NewAppModule(appCodec, app.EthqueryKeeper)
 
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
