@@ -3,24 +3,13 @@ package cosmicether.ethstate.v1;
 
 import "cosmicether/ethstate/v1/ethstate.proto";
 import "gogoproto/gogo.proto";
-import "google/api/annotations.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethstate/types";
 
 service Msg {
-  rpc GetSlotDataFromEth(MsgGetSlotDataFromEth) returns (MsgGetSlotDataFromEthResponse) {
-    option (google.api.http) = {
-      post: "/cosmicether/tx/v1/ethstate/getslotdata"
-      body: "*"
-    };
-  }
+  rpc GetSlotDataFromEth(MsgGetSlotDataFromEth) returns (MsgGetSlotDataFromEthResponse) {}
 
-  rpc SubmitSlotData(MsgSubmitSlotData) returns (MsgSubmitSlotDataResponse) {
-    option (google.api.http) = {
-      post: "/cosmicether/tx/v1/ethstate/getslotdata"
-      body: "*"
-    };
-  }
+  rpc SubmitSlotData(MsgSubmitSlotData) returns (MsgSubmitSlotDataResponse) {}
 }
 
 message MsgGetSlotDataFromEth {
@@ -33,6 +22,9 @@ message MsgGetSlotDataFromEth {
 }
 
 message MsgSubmitSlotData {
+  option (gogoproto.equal) = false;
+  option (gogoproto.goproto_getters) = false;
+
   slot_data slotData = 1;
   string from_address = 2;
 }

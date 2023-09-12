@@ -10,40 +10,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/cosmicether/tx/v1/ethstate/getslotdata": {
-      "post": {
-        "operationId": "SubmitSlotData",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1MsgSubmitSlotDataResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1MsgSubmitSlotData"
-            }
-          }
-        ],
-        "tags": [
-          "Msg"
-        ]
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
     "protobufAny": {
       "type": "object",
@@ -78,34 +45,8 @@
         }
       }
     },
-    "v1MsgGetSlotDataFromEth": {
-      "type": "object",
-      "properties": {
-        "contractAddress": {
-          "type": "string"
-        },
-        "height": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "slot": {
-          "type": "string"
-        }
-      }
-    },
     "v1MsgGetSlotDataFromEthResponse": {
       "type": "object"
-    },
-    "v1MsgSubmitSlotData": {
-      "type": "object",
-      "properties": {
-        "slotData": {
-          "$ref": "#/definitions/v1slot_data"
-        },
-        "from_address": {
-          "type": "string"
-        }
-      }
     },
     "v1MsgSubmitSlotDataResponse": {
       "type": "object"

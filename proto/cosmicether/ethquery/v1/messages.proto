@@ -4,18 +4,12 @@ package cosmicether.ethquery.v1;
 import "cosmicether/ethquery/v1/ethquery.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
-import "google/api/annotations.proto";
 
 option go_package = "github.com/ajansari95/cosmicether/x/ethquery/types";
 
 service Msg {
   // SubmitQueryResponse defines a method for submit query responses.
-  rpc SubmitQueryResponse(MsgSubmitQueryResponse) returns (MsgSubmitQueryResponseResponse) {
-    option (google.api.http) = {
-      post: "/ethquery/tx/v1beta1/submitquery"
-      body: "*"
-    };
-  }
+  rpc SubmitQueryResponse(MsgSubmitQueryResponse) returns (MsgSubmitQueryResponseResponse) {}
 }
 
 message MsgSubmitQueryResponse {

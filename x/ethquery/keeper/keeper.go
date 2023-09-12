@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"context"
 	"cosmicether/x/ethquery/types"
 	"fmt"
 
@@ -18,19 +17,16 @@ type (
 		storeKey   storetypes.StoreKey
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
+		callbacks  map[string]types.QueryCallbacks
 	}
 )
-
-func (k Keeper) Queries(ctx context.Context, request *types.QueryRequestsRequest) (*types.QueryRequestsResponse, error) {
-	//TODO implement me
-	panic("implement me")
-}
 
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
+
 
 ) *Keeper {
 	// set KeyTable if it has not already been set
@@ -43,9 +39,18 @@ func NewKeeper(
 		storeKey:   storeKey,
 		memKey:     memKey,
 		paramstore: ps,
+		callbacks:  make(map[string]types.QueryCallbacks),
 	}
 }
 
+func (k *Keeper) SetCallbackHandler(module string, handler types.QueryCallbacks) error {
+	_, found := k.callbacks[module]
+	if found {
+		return fmt.Errorf("callback handler already set for %s", module)
+	}
+	k.callbacks[module] = handler.RegisterCallbacks()
+	return nil
+}
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
