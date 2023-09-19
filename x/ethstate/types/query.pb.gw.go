@@ -397,11 +397,11 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_SlotData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"cosmicether", "ethstate", "slot_data", "contract_address", "slot"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_SlotData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"cosmicether", "ethstate", "slot_data", "contract_address", "slot"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_ContractData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmicether", "ethstate", "contract_data", "contract_address"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ContractData_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmicether", "ethstate", "contract_data", "contract_address"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_EthBlock_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmicether", "ethstate", "eth_block", "block_height"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_EthBlock_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"cosmicether", "ethstate", "eth_block", "block_height"}, "", runtime.AssumeColonVerbOpt(false)))
 )
 
 var (

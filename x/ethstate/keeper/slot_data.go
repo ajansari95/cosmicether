@@ -1,8 +1,7 @@
 package keeper
 
 import (
-	"cosmicether/x/ethstate/types"
-
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

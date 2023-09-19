@@ -71,8 +71,8 @@ func (msg MsgSubmitSlotData) GetSigners() []sdk.AccAddress {
 }
 
 // NewMsgGetSlotDataFromEth - construct a msg to get slot data from eth
-func NewMsgGetSlotDataFromEth(contractAddress string, slot string, height uint64) *MsgGetSlotDataFromEth {
-	return &MsgGetSlotDataFromEth{ContractAddress: contractAddress, Height: height, Slot: slot}
+func NewMsgGetSlotDataFromEth(contractAddress string, fromAddress sdk.Address, slot string, height uint64) *MsgGetSlotDataFromEth {
+	return &MsgGetSlotDataFromEth{ContractAddress: contractAddress, FromAddress: fromAddress.String(), Height: height, Slot: slot}
 }
 
 // Route Implements Msg.
@@ -83,6 +83,10 @@ func (msg MsgGetSlotDataFromEth) Type() string { return TypeMsgGetSlotDataFromEt
 
 // ValidateBasic Implements Msg.
 func (msg MsgGetSlotDataFromEth) ValidateBasic() error {
+	_, err := sdk.AccAddressFromBech32(msg.FromAddress)
+	if err != nil {
+		return err
+	}
 	if msg.Height <= 0 || msg.ContractAddress == "" || msg.Slot == "" {
 		return ErrSlotDataInvalid
 	}
@@ -96,5 +100,9 @@ func (msg MsgGetSlotDataFromEth) GetSignBytes() []byte {
 
 // GetSigners Implements Msg.
 func (msg MsgGetSlotDataFromEth) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{}
+	from, err := sdk.AccAddressFromBech32(msg.FromAddress)
+	if err != nil {
+		panic(err)
+	}
+	return []sdk.AccAddress{from}
 }

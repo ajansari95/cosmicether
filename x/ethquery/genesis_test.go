@@ -1,12 +1,12 @@
 package ethquery_test
 
 import (
-	keepertest "cosmicether/testutil/keeper"
-	"cosmicether/testutil/nullify"
-	"cosmicether/x/ethquery"
-	"cosmicether/x/ethquery/types"
 	"testing"
 
+	keepertest "github.com/ajansari95/cosmicether/testutil/keeper"
+	"github.com/ajansari95/cosmicether/testutil/nullify"
+	"github.com/ajansari95/cosmicether/x/ethquery"
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	"github.com/stretchr/testify/require"
 )
 

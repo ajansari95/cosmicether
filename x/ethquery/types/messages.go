@@ -16,6 +16,15 @@ var (
 	_ legacytx.LegacyMsg = &MsgSubmitQueryResponse{}
 )
 
+func NewMsgSubmitQueryResponse(queryId string, height int64, result []byte, fromAddress string) *MsgSubmitQueryResponse {
+	return &MsgSubmitQueryResponse{
+		QueryId:     queryId,
+		Result:      result,
+		FromAddress: fromAddress,
+		Height:      height,
+	}
+}
+
 // Route Implements Msg.
 func (msg MsgSubmitQueryResponse) Route() string { return RouterKey }
 

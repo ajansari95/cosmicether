@@ -1,8 +1,8 @@
 package ethstate
 
 import (
-	"cosmicether/x/ethstate/keeper"
-	"cosmicether/x/ethstate/types"
+	"github.com/ajansari95/cosmicether/x/ethstate/keeper"
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

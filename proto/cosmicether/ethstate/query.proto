@@ -9,15 +9,19 @@ option go_package = "github.com/ajansari95/cosmicether/x/ethstate/types";
 
 service Query {
   rpc SlotData(QuerySlotDataRequest) returns (QuerySlotDataRequestResponse) {
-    option (google.api.http).get = "/cosmicether/ethstate/slot_data/{contract_address}/{slot}";
+    option (google.api.http).get =
+        "/cosmicether/ethstate/slot_data/{contract_address}/{slot}";
   }
 
-  rpc ContractData(QueryContractDataRequest) returns (QueryContractDataRequestResponse) {
-    option (google.api.http).get = "/cosmicether/ethstate/contract_data/{contract_address}";
+  rpc ContractData(QueryContractDataRequest)
+      returns (QueryContractDataRequestResponse) {
+    option (google.api.http).get =
+        "/cosmicether/ethstate/contract_data/{contract_address}";
   }
 
   rpc EthBlock(QueryEthBlockRequest) returns (QueryEthBlockRequestResponse) {
-    option (google.api.http).get = "/cosmicether/ethstate/eth_block/{block_height}";
+    option (google.api.http).get =
+        "/cosmicether/ethstate/eth_block/{block_height}";
   }
 }
 
@@ -26,22 +30,14 @@ message QuerySlotDataRequest {
   string slot = 2;
 }
 
-message QuerySlotDataRequestResponse {
-  slot_data slot_data = 1;
-}
+message QuerySlotDataRequestResponse { slot_data slot_data = 1; }
 
-message QueryContractDataRequest {
-  string contract_address = 1;
-}
+message QueryContractDataRequest { string contract_address = 1; }
 
 message QueryContractDataRequestResponse {
-  repeated slot_data slots = 1 [(gogoproto.nullable) = false];
+  repeated slot_data slots = 1 [ (gogoproto.nullable) = false ];
 }
 
-message QueryEthBlockRequest {
-  uint64 block_height = 1;
-}
+message QueryEthBlockRequest { uint64 block_height = 1; }
 
-message QueryEthBlockRequestResponse {
-  block_data block_data = 1;
-}
+message QueryEthBlockRequestResponse { block_data block_data = 1; }

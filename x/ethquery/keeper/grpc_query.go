@@ -2,8 +2,8 @@ package keeper
 
 import (
 	"context"
-	"cosmicether/x/ethquery/types"
 
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

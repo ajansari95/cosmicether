@@ -2,12 +2,12 @@ package ethquery
 
 import (
 	"context"
-	"cosmicether/x/ethquery/client/cli"
-	"cosmicether/x/ethquery/keeper"
-	"cosmicether/x/ethquery/types"
 	"encoding/json"
 	"fmt"
 
+	"github.com/ajansari95/cosmicether/x/ethquery/client/cli"
+	"github.com/ajansari95/cosmicether/x/ethquery/keeper"
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"

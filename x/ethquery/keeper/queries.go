@@ -1,11 +1,28 @@
 package keeper
 
 import (
-	"cosmicether/x/ethquery/types"
+	"fmt"
 
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
+
+func (k Keeper) NewEthQuery(
+	module string,
+	queryType string,
+	request []byte,
+	callbackID string,
+	height uint64,
+) *types.EthQuery {
+	return &types.EthQuery{
+		Id:          GenerateQueryHash(queryType, request, module, fmt.Sprintf("%d", height)),
+		QueryType:   queryType,
+		Request:     request,
+		CallbackId:  callbackID,
+		BlockHeight: height,
+	}
+}
 
 // GetEthQuery returns a ethQuery from its index
 func (k Keeper) GetEthQuery(ctx sdk.Context, id string) (types.EthQuery, bool) {
@@ -19,7 +36,7 @@ func (k Keeper) GetEthQuery(ctx sdk.Context, id string) (types.EthQuery, bool) {
 	return query, true
 }
 
-//SetEthQuery set a specific ethQuery in the store from its index
+// SetEthQuery set a specific ethQuery in the store from its index
 func (k Keeper) SetEthQuery(ctx sdk.Context, ethQuery types.EthQuery) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), nil)
 	bz := k.cdc.MustMarshal(&ethQuery)

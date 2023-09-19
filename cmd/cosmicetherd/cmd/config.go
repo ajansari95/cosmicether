@@ -1,9 +1,8 @@
 package cmd
 
 import (
+	"github.com/ajansari95/cosmicether/app"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
-	"cosmicether/app"
 )
 
 func initSDKConfig() {

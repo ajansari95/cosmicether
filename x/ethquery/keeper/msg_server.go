@@ -2,11 +2,11 @@ package keeper
 
 import (
 	"context"
-	"cosmicether/x/ethquery/types"
 	"errors"
 	"fmt"
 	"sort"
 
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

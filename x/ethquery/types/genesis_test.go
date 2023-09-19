@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"cosmicether/x/ethquery/types"
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	"github.com/stretchr/testify/require"
 )
 

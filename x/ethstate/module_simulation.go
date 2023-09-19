@@ -3,9 +3,9 @@ package ethstate
 import (
 	"math/rand"
 
-	"cosmicether/testutil/sample"
-	ethstatesimulation "cosmicether/x/ethstate/simulation"
-	"cosmicether/x/ethstate/types"
+	"github.com/ajansari95/cosmicether/testutil/sample"
+	ethstatesimulation "github.com/ajansari95/cosmicether/x/ethstate/simulation"
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"

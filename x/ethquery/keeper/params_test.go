@@ -3,8 +3,8 @@ package keeper_test
 import (
 	"testing"
 
-	testkeeper "cosmicether/testutil/keeper"
-	"cosmicether/x/ethquery/types"
+	testkeeper "github.com/ajansari95/cosmicether/testutil/keeper"
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	"github.com/stretchr/testify/require"
 )
 

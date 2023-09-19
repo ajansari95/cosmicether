@@ -1,9 +1,8 @@
 package ethquery
 
 import (
-	"cosmicether/x/ethquery/keeper"
-	"cosmicether/x/ethquery/types"
-
+	"github.com/ajansari95/cosmicether/x/ethquery/keeper"
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

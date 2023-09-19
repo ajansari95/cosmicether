@@ -1,12 +1,11 @@
 package app
 
 import (
+	"github.com/ajansari95/cosmicether/app/params"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/std"
 	"github.com/cosmos/cosmos-sdk/x/auth/tx"
-
-	"cosmicether/app/params"
 )
 
 // makeEncodingConfig creates an EncodingConfig for an amino based test configuration.

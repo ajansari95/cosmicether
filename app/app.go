@@ -1,15 +1,6 @@
 package app
 
 import (
-	// this line is used by starport scaffolding # stargate/app/moduleImport
-	appparams "cosmicether/app/params"
-	"cosmicether/docs"
-	ethquerymodule "cosmicether/x/ethquery"
-	ethquerymodulekeeper "cosmicether/x/ethquery/keeper"
-	ethquerymoduletypes "cosmicether/x/ethquery/types"
-	ethstatemodule "cosmicether/x/ethstate"
-	ethstatemodulekeeper "cosmicether/x/ethstate/keeper"
-	ethstatemoduletypes "cosmicether/x/ethstate/types"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -18,6 +9,15 @@ import (
 
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 	reflectionv1 "cosmossdk.io/api/cosmos/reflection/v1"
+	// this line is used by starport scaffolding # stargate/app/moduleImport
+	appparams "github.com/ajansari95/cosmicether/app/params"
+	"github.com/ajansari95/cosmicether/docs"
+	ethquerymodule "github.com/ajansari95/cosmicether/x/ethquery"
+	ethquerymodulekeeper "github.com/ajansari95/cosmicether/x/ethquery/keeper"
+	ethquerymoduletypes "github.com/ajansari95/cosmicether/x/ethquery/types"
+	ethstatemodule "github.com/ajansari95/cosmicether/x/ethstate"
+	ethstatemodulekeeper "github.com/ajansari95/cosmicether/x/ethstate/keeper"
+	ethstatemoduletypes "github.com/ajansari95/cosmicether/x/ethstate/types"
 	dbm "github.com/cometbft/cometbft-db"
 	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cometbft/cometbft/libs/log"
@@ -524,14 +524,6 @@ func New(
 		),
 	)
 
-	app.EthstateKeeper = *ethstatemodulekeeper.NewKeeper(
-		appCodec,
-		keys[ethstatemoduletypes.StoreKey],
-		keys[ethstatemoduletypes.MemStoreKey],
-		app.GetSubspace(ethstatemoduletypes.ModuleName),
-	)
-	ethstateModule := ethstatemodule.NewAppModule(appCodec, app.EthstateKeeper, app.AccountKeeper, app.BankKeeper)
-
 	app.EthqueryKeeper = *ethquerymodulekeeper.NewKeeper(
 		appCodec,
 		keys[ethquerymoduletypes.StoreKey],
@@ -540,6 +532,18 @@ func New(
 	)
 	ethqueryModule := ethquerymodule.NewAppModule(appCodec, app.EthqueryKeeper)
 
+	app.EthstateKeeper = *ethstatemodulekeeper.NewKeeper(
+		appCodec,
+		app.EthqueryKeeper,
+		keys[ethstatemoduletypes.StoreKey],
+		keys[ethstatemoduletypes.MemStoreKey],
+		app.GetSubspace(ethstatemoduletypes.ModuleName),
+	)
+	ethstateModule := ethstatemodule.NewAppModule(appCodec, app.EthstateKeeper, app.AccountKeeper, app.BankKeeper)
+
+	if err := app.EthqueryKeeper.SetCallbackHandler(ethstatemoduletypes.ModuleName, app.EthstateKeeper.CallbackHandler()); err != nil {
+		panic(err)
+	}
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/

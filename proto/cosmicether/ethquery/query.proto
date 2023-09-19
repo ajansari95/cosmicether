@@ -16,5 +16,5 @@ service Query {
 message QueryRequestsRequest {}
 
 message QueryRequestsResponse {
-  repeated EthQuery quereis = 1 [(gogoproto.nullable) = false];
+  repeated EthQuery quereis = 1 [ (gogoproto.nullable) = false ];
 }
