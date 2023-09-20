@@ -46,3 +46,85 @@ The `ethstate` module manages the Ethereum contract slot's data within Cosmos. I
     ```
 
 Follow the module-specific READMEs for detailed usage instructions.
+
+
+---
+
+## Testing the POC
+
+In order to verify the functionality of the `CosmicEther` bridge, follow the steps outlined below:
+
+### Step 1: Installation
+- Install both `cosmicether` and `cosmic-eth-relayer`.
+    - `cosmic-eth-relayer` repository link: [cosmic-eth-relayer](https://github.com/ajansari95/cosmic-eth-relayer)
+
+### Step 2: Configuration
+- Configure the `cosmic-relayer` by creating or updating the `config.yaml` file in the relayer's HOME directory. Populate the file as follows:
+```yaml
+querier_chain: test-1
+eth_rpc: https://mainnet.infura.io/v3/<API-KEY>
+chains:
+    test-1:
+      key: default
+      chain-id: test-1
+      rpc-addr: http://localhost:26657
+      grpc-addr: http://localhost:9090
+      account-prefix: cosmos
+      keyring-backend: test
+      gas-adjustment: 1.5
+      gas-prices: 0.0001stake
+      min-gas-amount: 0
+      key-directory: ./cosmicrelayer/keys
+      debug: true
+      timeout: 20s
+      block-timeout: ""
+      output-format: json
+      sign-mode: direct
+```
+- Remember to add the key to the relayer.
+
+### Step 3: Node Setup
+- Execute the `testnode.sh` script:
+```bash
+sh testnode.sh
+```
+
+### Step 4: Fund Transfer
+- Transfer funds to your relayer's wallet:
+```bash
+cosmicetherd tx bank send [myKey] [relayer-address] 9000stake --chain-id test-1 --keyring-backend test 
+```
+
+### Step 5: Start the Relayer
+- Initiate the relayer using the command:
+```bash
+cosmic-relayer --home RELAYER_HOME_DIR run
+```
+
+### Step 6: Create SlotData Requests
+- Create a few `get-slot-data-from-eth` requests:
+```bash
+cosmicetherd tx ethstate get-slot-data-from-eth 0x314159265dD8dbb310642f98f50C066173C1259b 0x02 18077318 --from myKey --keyring-backend test --chain-id test-1
+cosmicetherd tx ethstate get-slot-data-from-eth 0x314159265dD8dbb310642f98f50C066173C1259b 0x03 18077318 --from myKey --keyring-backend test --chain-id test-1
+cosmicetherd tx ethstate get-slot-data-from-eth 0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72 0x03 18077319 --from myKey --keyring-backend test --chain-id test-1
+
+```
+
+### Step 7: Relaying Process
+- Note that the relaying process might take some seconds. Be patient and wait for the completion.
+
+### Step 8: Query Data
+- You can query the data you've just requested:
+    - For querying a single slot:
+    ```bash
+    cosmicetherd q ethstate slot-data 0x314159265dD8dbb310642f98f50C066173C1259b 0x02
+    ```
+    - For querying the entire contract:
+    ```bash
+    cosmicetherd q ethstate contract-data 0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72 
+    ```
+
+### Step 9: Verification Logic
+- Every 10 blocks (this interval is configurable), the verification logic is initiated. Until verification is completed, the data's state will display `verified: false`.
+
+---
