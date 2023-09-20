@@ -1,11 +1,11 @@
 package ethquery
 
 import (
-	"cosmicether/testutil/sample"
-	ethquerysimulation "cosmicether/x/ethquery/simulation"
-	"cosmicether/x/ethquery/types"
 	"math/rand"
 
+	"github.com/ajansari95/cosmicether/testutil/sample"
+	ethquerysimulation "github.com/ajansari95/cosmicether/x/ethquery/simulation"
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"

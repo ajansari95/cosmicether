@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "cosmicether/ethquery/query.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/cosmicether/ethquery/queries": {
+      "get": {
+        "operationId": "Queries",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ethqueryQueryRequestsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "Query"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ethqueryEthQuery": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "query_type": {
+          "type": "string"
+        },
+        "request": {
+          "type": "string",
+          "format": "byte"
+        },
+        "callback_id": {
+          "type": "string"
+        },
+        "block_height": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "ethqueryQueryRequestsResponse": {
+      "type": "object",
+      "properties": {
+        "quereis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ethqueryEthQuery"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

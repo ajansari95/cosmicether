@@ -7,6 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	// this line is used by starport scaffolding # root/moduleImport
+	"github.com/ajansari95/cosmicether/app"
+	appparams "github.com/ajansari95/cosmicether/app/params"
 	dbm "github.com/cometbft/cometbft-db"
 	tmcfg "github.com/cometbft/cometbft/config"
 	tmcli "github.com/cometbft/cometbft/libs/cli"
@@ -36,10 +39,6 @@ import (
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	// this line is used by starport scaffolding # root/moduleImport
-
-	"cosmicether/app"
-	appparams "cosmicether/app/params"
 )
 
 // NewRootCmd creates a new root command for a Cosmos SDK application

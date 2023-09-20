@@ -14,6 +14,14 @@ const (
 	MemStoreKey = "mem_ethquery"
 )
 
+var (
+	KeyPrefixEthQuery = []byte{0x01}
+)
+
 func KeyPrefix(p string) []byte {
 	return []byte(p)
+}
+
+func GetEthQueryKey(id string) []byte {
+	return append(KeyPrefixEthQuery, append([]byte(id))...)
 }

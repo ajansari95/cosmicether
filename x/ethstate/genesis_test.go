@@ -3,10 +3,10 @@ package ethstate_test
 import (
 	"testing"
 
-	keepertest "cosmicether/testutil/keeper"
-	"cosmicether/testutil/nullify"
-	"cosmicether/x/ethstate"
-	"cosmicether/x/ethstate/types"
+	keepertest "github.com/ajansari95/cosmicether/testutil/keeper"
+	"github.com/ajansari95/cosmicether/testutil/nullify"
+	"github.com/ajansari95/cosmicether/x/ethstate"
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -1,8 +1,7 @@
 package keeper
 
 import (
-	"cosmicether/x/ethstate/types"
-
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -68,4 +67,12 @@ func (k *Keeper) AllContractSlotData(ctx sdk.Context, contractAddress string) []
 		return false
 	})
 	return list
+}
+
+func (k *Keeper) GetAllSlotData(ctx sdk.Context) (list []types.SlotData) {
+	k.IterateSlotDatas(ctx, func(_ int64, slotData types.SlotData) bool {
+		list = append(list, slotData)
+		return false
+	})
+	return
 }

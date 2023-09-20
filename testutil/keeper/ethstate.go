@@ -3,8 +3,8 @@ package keeper
 import (
 	"testing"
 
-	"cosmicether/x/ethstate/keeper"
-	"cosmicether/x/ethstate/types"
+	"github.com/ajansari95/cosmicether/x/ethstate/keeper"
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	tmdb "github.com/cometbft/cometbft-db"
 	"github.com/cometbft/cometbft/libs/log"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
@@ -30,6 +30,8 @@ func EthstateKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 	registry := codectypes.NewInterfaceRegistry()
 	cdc := codec.NewProtoCodec(registry)
 
+	icqKeeper, _ := EthqueryKeeper(t)
+
 	paramsSubspace := typesparams.NewSubspace(cdc,
 		types.Amino,
 		storeKey,
@@ -38,6 +40,7 @@ func EthstateKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 	)
 	k := keeper.NewKeeper(
 		cdc,
+		*icqKeeper,
 		storeKey,
 		memStoreKey,
 		paramsSubspace,

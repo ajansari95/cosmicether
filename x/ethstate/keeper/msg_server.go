@@ -2,9 +2,10 @@ package keeper
 
 import (
 	"context"
-	"cosmicether/x/ethstate/types"
+	"encoding/json"
 	"fmt"
 
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
@@ -31,8 +32,7 @@ func (m msgServer) SubmitSlotData(c context.Context, msg *types.MsgSubmitSlotDat
 	ctx.EventManager().EmitEvents(sdk.Events{
 		sdk.NewEvent(
 			sdk.EventTypeMessage,
-			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName,
-			),
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
 		),
 		sdk.NewEvent(
 			types.EventTypeSubmitSlotData,
@@ -42,20 +42,56 @@ func (m msgServer) SubmitSlotData(c context.Context, msg *types.MsgSubmitSlotDat
 	})
 
 	//create ethquery request for block height
+	err := m.Keeper.CreateBlockHeaderQuery(ctx, msg.SlotData.Height)
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.MsgSubmitSlotDataResponse{}, nil
 }
 
 // GetSlotDataFromEth handles MsgGetSlotDataFromEth by creating a query on ethquery module for the data.
 func (m msgServer) GetSlotDataFromEth(c context.Context, msg *types.MsgGetSlotDataFromEth) (*types.MsgGetSlotDataFromEthResponse, error) {
-	//ctx := sdk.UnwrapSDKContext(c)
+	ctx := sdk.UnwrapSDKContext(c)
 
 	height := msg.Height
-	//create ethquery request for block height
+
 	fmt.Println(height)
 
-	//create ethquery request for slot data and the heigh
-	fmt.Println(msg.ContractAddress, msg.Slot, msg.Height)
+	request := queryGetStorageAt{
+		ContractAddress: msg.ContractAddress,
+		Slot:            msg.Slot,
+		Height:          height,
+	}
+
+	reqbz, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
+
+	//create ethquery request for slot data and the height
+
+	err = m.Keeper.CreateBlockHeaderQuery(ctx, height)
+	if err != nil {
+		return nil, err
+	}
+
+	m.ICQKeeper.MakeRequest(ctx, types.ModuleName, "eth_getStorageAt", reqbz, "getstorageat", uint64(ctx.BlockHeight()))
+
+	m.Logger(ctx).Info("Created query on ethquery module for slot data and height);")
+
+	ctx.EventManager().EmitEvents(sdk.Events{
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+		),
+		sdk.NewEvent(
+			types.EventTypeGetSlotDataFromEth,
+			sdk.NewAttribute(types.AttributeKeySlotData, msg.Slot),
+			sdk.NewAttribute(types.AttributeKeyContractAddress, msg.ContractAddress),
+			sdk.NewAttribute(types.AttributeKeySlotDataHeight, fmt.Sprintf("%v", msg.Height)),
+		),
+	})
 
 	return &types.MsgGetSlotDataFromEthResponse{}, nil
 }

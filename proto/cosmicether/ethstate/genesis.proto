@@ -1,0 +1,17 @@
+syntax = "proto3";
+package cosmicether.ethstate;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/ajansari95/cosmicether/x/ethstate/types";
+
+// GenesisState defines the ethquery module's genesis state.
+message GenesisState {
+  option (gogoproto.goproto_getters) = false;
+  Params params = 1 [ (gogoproto.nullable) = false ];
+}
+
+message Params {
+  option (gogoproto.equal) = true;
+  option (gogoproto.goproto_stringer) = false;
+}

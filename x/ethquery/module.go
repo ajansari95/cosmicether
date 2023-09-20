@@ -2,12 +2,12 @@ package ethquery
 
 import (
 	"context"
-	"cosmicether/x/ethquery/client/cli"
-	"cosmicether/x/ethquery/keeper"
-	"cosmicether/x/ethquery/types"
 	"encoding/json"
 	"fmt"
 
+	"github.com/ajansari95/cosmicether/x/ethquery/client/cli"
+	"github.com/ajansari95/cosmicether/x/ethquery/keeper"
+	"github.com/ajansari95/cosmicether/x/ethquery/types"
 	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
@@ -88,22 +88,16 @@ func (AppModuleBasic) GetQueryCmd() *cobra.Command {
 type AppModule struct {
 	AppModuleBasic
 
-	keeper        keeper.Keeper
-	accountKeeper types.AccountKeeper
-	bankKeeper    types.BankKeeper
+	keeper keeper.Keeper
 }
 
 func NewAppModule(
 	cdc codec.Codec,
 	keeper keeper.Keeper,
-	accountKeeper types.AccountKeeper,
-	bankKeeper types.BankKeeper,
 ) AppModule {
 	return AppModule{
 		AppModuleBasic: NewAppModuleBasic(cdc),
 		keeper:         keeper,
-		accountKeeper:  accountKeeper,
-		bankKeeper:     bankKeeper,
 	}
 }
 

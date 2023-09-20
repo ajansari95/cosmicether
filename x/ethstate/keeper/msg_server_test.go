@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	keepertest "cosmicether/testutil/keeper"
-	"cosmicether/x/ethstate/keeper"
-	"cosmicether/x/ethstate/types"
+	keepertest "github.com/ajansari95/cosmicether/testutil/keeper"
+	"github.com/ajansari95/cosmicether/x/ethstate/keeper"
+	"github.com/ajansari95/cosmicether/x/ethstate/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )

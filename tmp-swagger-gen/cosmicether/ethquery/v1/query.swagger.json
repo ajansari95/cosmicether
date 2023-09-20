@@ -84,8 +84,9 @@
         "callback_id": {
           "type": "string"
         },
-        "height": {
-          "type": "string"
+        "block_height": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },

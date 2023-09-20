@@ -161,7 +161,7 @@ func RegisterMsgHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 }
 
 var (
-	pattern_Msg_SubmitQueryResponse_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"ethquery", "tx", "v1beta1", "submitquery"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Msg_SubmitQueryResponse_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"cosmicether", "tx", "v1", "ethquery", "submitquery"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

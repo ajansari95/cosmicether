@@ -3,11 +3,10 @@ package main
 import (
 	"os"
 
+	"github.com/ajansari95/cosmicether/app"
+	"github.com/ajansari95/cosmicether/cmd/cosmicetherd/cmd"
 	"github.com/cosmos/cosmos-sdk/server"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
-
-	"cosmicether/app"
-	"cosmicether/cmd/cosmicetherd/cmd"
 )
 
 func main() {

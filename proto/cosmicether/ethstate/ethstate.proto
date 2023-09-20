@@ -1,0 +1,18 @@
+syntax = "proto3";
+package cosmicether.ethstate;
+
+option go_package = "github.com/ajansari95/cosmicether/x/ethstate/types";
+
+message slot_data {
+  uint64 height = 1;
+  string contractAddress = 2;
+  string slot = 4;
+  bytes data = 3;
+  bytes proof = 6;
+  bool verified = 5;
+}
+
+message block_data {
+  uint64 height = 1;
+  bytes data = 2;
+}
