@@ -128,3 +128,21 @@ cosmicetherd tx ethstate get-slot-data-from-eth 0xC18360217D8F7Ab5e7c516566761Ea
 - Every 10 blocks (this interval is configurable), the verification logic is initiated. Until verification is completed, the data's state will display `verified: false`.
 
 ---
+
+## Future Improvements
+
+- The current framework, works as a POC in its initial offering, has various potential areas for expansion and refinement. Here are some areas we've identified for future enhancement:
+
+1. **Performance Optimization:** The current implementation of data retrieval and validation can be further optimized. The usage of more efficient algorithms or introducing parallel processing can expedite the query-response cycle especially the relayer part.
+
+2. **Broadened Query Support:** The addition of more Ethereum query types will expand the capabilities of the framework, catering to a wider range of use cases and wide range of callback support depending on usecase.
+
+3. **Enhanced Security Measures:** While currently i have used MPT and proves to verify data. There can be other ways that will need some research.
+
+4. **Interactivity with Other Blockchains:** Broadening the framework's scope beyond Ethereum, other EVM chains will widen the applicability of `CosmicEther`.
+
+5. **Modular Architecture:** Restructuring the codebase to further modularize components can enhance scalability, facilitate easier updates and migration if needed. for eg. proto versioning.
+
+8. **Advanced Verification Mechanisms:** Beyond the current verification logic that kicks in periodically. for eg. Baking verification in the consensus layer i.e tendermint.
+
+9. **Increasing Usability of Data Stored:** The current implementation of the `ethstate` module stores the data as is. We can just view it, if schema for a contract is known we can parse it and store it in a more usable format, but getting access to ABI is only way i can look at it - will research more on it to see if there is a better way.
