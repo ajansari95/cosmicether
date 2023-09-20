@@ -68,3 +68,11 @@ func (k *Keeper) AllContractSlotData(ctx sdk.Context, contractAddress string) []
 	})
 	return list
 }
+
+func (k *Keeper) GetAllSlotData(ctx sdk.Context) (list []types.SlotData) {
+	k.IterateSlotDatas(ctx, func(_ int64, slotData types.SlotData) bool {
+		list = append(list, slotData)
+		return false
+	})
+	return
+}

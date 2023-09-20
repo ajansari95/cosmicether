@@ -65,12 +65,15 @@ func GetStorageCallback(k *Keeper, ctx sdk.Context, args []byte, query ethquerym
 		return err
 	}
 
+	Data := storageData.StorageData
+
 	slotData = types.SlotData{
 		Height:          height,
 		Slot:            storageData.Slot,
 		ContractAddress: storageData.StorageProofData.Address.Hex(),
 		Proof:           proof,
 		Verified:        false,
+		Data:            Data,
 	}
 	k.SetSlotData(ctx, &slotData)
 

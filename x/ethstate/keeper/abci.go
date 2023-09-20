@@ -15,7 +15,6 @@ func (k *Keeper) BeginBlocker(ctx sdk.Context) {
 
 	if ctx.BlockHeight()%blockInterval == 0 {
 		k.Logger(ctx).Info("Verifying the slotData", "height", ctx.BlockHeight())
-
 		k.IterateSlotDatas(ctx, func(index int64, slotData types.SlotData) (stop bool) {
 			if slotData.Verified == false {
 				k.Logger(ctx).Info("Verifying the slotData", "height", ctx.BlockHeight())

@@ -78,10 +78,10 @@ func VerifyEthStorageProof(proof *StorageResult, storageHash common.Hash) (bool,
 	return VerifyProof(storageHash, proof.Key, value, proof.Proof)
 }
 
-func VerifyEIP1186(proof *StorageProof, storageHash common.Hash) (bool, error) {
+func VerifyEIP1186(proof *StorageProof, stateRoot common.Hash) (bool, error) {
 	for _, sp := range proof.StorageProof {
 		sp := sp
-		if ok, err := VerifyEthStorageProof(&sp, storageHash); !ok {
+		if ok, err := VerifyEthStorageProof(&sp, proof.StorageHash); !ok {
 			return false, err
 		}
 	}

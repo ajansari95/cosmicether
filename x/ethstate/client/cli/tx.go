@@ -80,7 +80,7 @@ func GetGetSlotDataFromEthTxCmd() *cobra.Command {
 		Use:   "get-slot-data-from-eth [contractAddress] [slot] [height]",
 		Short: "Get slot data from eth",
 		Example: strings.TrimSpace(
-			fmt.Sprintf(`$ %s tx ethstate get-slot-data-from-eth [contractAddress] [slot] [height]`),
+			fmt.Sprintf(`$ %s tx ethstate get-slot-data-from-eth [contractAddress] [slot] [height]`, "cosmicetherd"),
 		),
 		Args: cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) error {
