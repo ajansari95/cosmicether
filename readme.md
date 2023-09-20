@@ -135,14 +135,18 @@ cosmicetherd tx ethstate get-slot-data-from-eth 0xC18360217D8F7Ab5e7c516566761Ea
 
 1. **Performance Optimization:** The current implementation of data retrieval and validation can be further optimized. The usage of more efficient algorithms or introducing parallel processing can expedite the query-response cycle especially the relayer part.
 
-2. **Broadened Query Support:** The addition of more Ethereum query types will expand the capabilities of the framework, catering to a wider range of use cases and wide range of callback support depending on usecase.
+2. **Using Protobuf for Encoding**:  Currently the data and types related to eth are encoded/decoded using json. The performance  can be improved by using protobuf, and will be  in sync with  rest of cosmos sdk.
 
-3. **Enhanced Security Measures:** While currently i have used MPT and proves to verify data. There can be other ways that will need some research.
+3. **Broadened Query Support:** The addition of more Ethereum query types will expand the capabilities of the framework, catering to a wider range of use cases and wide range of callback support depending on usecase.
 
-4. **Interactivity with Other Blockchains:** Broadening the framework's scope beyond Ethereum, other EVM chains will widen the applicability of `CosmicEther`.
+4. **Enhanced Security Measures:** While currently i have used MPT and proves to verify data. There can be other ways that will need some research. 
 
 5. **Modular Architecture:** Restructuring the codebase to further modularize components can enhance scalability, facilitate easier updates and migration if needed. for eg. proto versioning.
 
-8. **Advanced Verification Mechanisms:** Beyond the current verification logic that kicks in periodically. for eg. Baking verification in the consensus layer i.e tendermint.
+6. **Advanced Verification Mechanisms:** Beyond the current verification logic that kicks in periodically. for eg. Baking verification in the consensus layer i.e tendermint.
 
-9. **Increasing Usability of Data Stored:** The current implementation of the `ethstate` module stores the data as is. We can just view it, if schema for a contract is known we can parse it and store it in a more usable format, but getting access to ABI is only way i can look at it - will research more on it to see if there is a better way.
+7. **Increasing Usability of Data Stored:** The current implementation of the `ethstate` module stores the data as is. We can just view it, if schema for a contract is known we can parse it and store it in a more usable format, but getting access to ABI is only way i can think of - will research more on it to see if there is a better way.
+
+8. **Querying Techniques:** Once we are dealing with some complex and demanding queries, we would need to improve the querying techniques such as using GraphQL queries (/sub-graphs?) based on a query function.
+
+9. **Caching Queries on Relayer:** The relayer can cache the queries it receives, and if it receives the same query again, it can directly return the cached response. This will reduce the load on the relayer and improve the performance.
