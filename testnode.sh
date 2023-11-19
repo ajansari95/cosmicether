@@ -26,15 +26,15 @@ cosmicetherd add-genesis-account $KEY 100000000000000000000000000stake --keyring
 # Sign genesis transaction
 cosmicetherd gentx $KEY 1000000000000000000000stake --keyring-backend $KEYRING --chain-id $CHAINID
 
-# Collect genesis tx
-cosmicetherd collect-gentxs
-
-# Run this to ensure everything worked and that the genesis file is setup correctly
-cosmicetherd validate-genesis
-
-if [[ $1 == "pending" ]]; then
-  echo "pending mode is on, please wait for the first block committed."
-fi
-
-# Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-cosmicetherd start --pruning=nothing
+## Collect genesis tx
+#cosmicetherd collect-gentxs
+#
+## Run this to ensure everything worked and that the genesis file is setup correctly
+#cosmicetherd validate-genesis
+#
+#if [[ $1 == "pending" ]]; then
+#  echo "pending mode is on, please wait for the first block committed."
+#fi
+#
+## Start the node (remove the --pruning=nothing flag if historical queries are not needed)
+#cosmicetherd start --pruning=nothing
